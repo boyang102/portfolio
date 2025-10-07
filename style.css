@@ -1,6 +1,41 @@
+/* Base body styles */
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-    font: 100%/1.5 system-ui;
-  }
+  font: 100%/1.5 system-ui;  /* 字体和行距 */
+  max-width: 100ch;          /* 限制内容最大宽度 */
+  margin-inline: auto;       /* 内容水平居中 */
+  padding: 1em;              /* 避免小屏幕贴边 */
+}
+
+/* Navigation bar with Flexbox */
+nav {
+  display: flex;             /* 启用 flex 布局 */
+  gap: 1em;                  /* 链接之间的间距 */
+  margin-bottom: 1.5em;      /* 导航和正文之间留点空间 */
+  border-bottom: 2px solid #ccc; /* 给导航加条下边框 */
+  padding-bottom: 0.5em;
+}
+
+nav a {
+  flex: 1;                   /* 每个链接平分宽度 */
+  text-align: center;        /* 文字居中 */
+  text-decoration: none;     /* 去掉下划线 */
+  color: #333;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: darkblue;
+}
+
+nav a.current {
+  font-weight: bold;         /* 高亮当前页面 */
+  color: darkred;
+}
+
+/* Profile image styling */
+img {
+  max-width: 100%;           /* 响应式，避免超出容器 */
+  height: auto;
+  border-radius: 10px;
+  margin-top: 1em;
+}
