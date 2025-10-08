@@ -1,41 +1,130 @@
+/* Global variables */
+html {
+  --color-accent: oklch(65% 50% 0);  /* 自定义强调色 */
+  accent-color: var(--color-accent);
+}
+
 /* Base body styles */
 body {
-  font: 100%/1.5 system-ui;  /* 字体和行距 */
-  max-width: 100ch;          /* 限制内容最大宽度 */
-  margin-inline: auto;       /* 内容水平居中 */
-  padding: 1em;              /* 避免小屏幕贴边 */
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: auto;
+  padding: 1em;
+  color: #333;
 }
 
 /* Navigation bar with Flexbox */
 nav {
-  display: flex;             /* 启用 flex 布局 */
-  gap: 1em;                  /* 链接之间的间距 */
-  margin-bottom: 1.5em;      /* 导航和正文之间留点空间 */
-  border-bottom: 2px solid #ccc; /* 给导航加条下边框 */
-  padding-bottom: 0.5em;
+  display: flex;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid oklch(80% 3% 200); /* 浅灰下边框 */
 }
 
 nav a {
-  flex: 1;                   /* 每个链接平分宽度 */
-  text-align: center;        /* 文字居中 */
-  text-decoration: none;     /* 去掉下划线 */
-  color: #333;
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5em;
   font-weight: 500;
 }
 
+/* Hover styles with accent color */
 nav a:hover {
-  color: darkblue;
+  border-bottom: 0.4em solid var(--color-accent);
+  padding-bottom: 0.1em;
+  color: var(--color-accent);
 }
 
+/* Current page link */
 nav a.current {
-  font-weight: bold;         /* 高亮当前页面 */
-  color: darkred;
+  border-bottom: 0.4em solid oklch(80% 3% 200);
+  padding-bottom: 0.1em;
+  font-weight: bold;
 }
 
 /* Profile image styling */
 img {
-  max-width: 100%;           /* 响应式，避免超出容器 */
+  max-width: 100%;
   height: auto;
   border-radius: 10px;
   margin-top: 1em;
+}
+
+/* Contact form with Grid layout */
+form {
+  display: grid;
+  grid-template-columns: auto 1fr; /* 左边自动宽度，右边占满 */
+  gap: 1em;                        /* 行列间距 */
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+label {
+  display: contents; /* label 的文字和 input 分别放入 grid */
+}
+
+input,
+textarea {
+  font: inherit;
+  padding: 0.5em;
+  box-sizing: border-box;
+  width: 100%; /* 占满右侧列 */
+}
+
+button {
+  grid-column: 1 / -1; /* 按钮跨两列 */
+  justify-self: center;
+  padding: 0.5em 1em;
+  font: inherit;
+}
+
+/* Projects grid layout */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1.5em;  /* 卡片之间的间距 */
+}
+
+/* Step 4.3: align project contents with subgrid */
+.projects article {
+  display: grid;
+  grid-template-rows: subgrid; /* 继承父 grid 的行 */
+  grid-row: span 3;            /* 每个项目跨 3 行 */
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  padding: 1em;
+  background: #fafafa;
+  gap: 1em; /* 内部间距 */
+}
+
+.projects h2 {
+  margin: 0; /* 去掉多余空隙，避免撑开行 */
+}
+
+.projects img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0; /* 用 gap 控制间距 */
+}
+
+/* Headings hierarchy and typography */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  text-wrap: balance; /* 避免标题换行不均衡 */
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 400%;   /* 比正文大很多，突出页面标题 */
+}
+
+h2 {
+  font-size: 200%;   /* 比正文和 h1 小，但仍然清晰 */
+}
+
+h3 {
+  font-size: 150%;
 }

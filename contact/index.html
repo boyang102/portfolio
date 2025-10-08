@@ -8,38 +8,28 @@
 </head>
 <body>
     <nav>
-        <a href="../index.html">Home</a> |
-        <a href="../projects/">Projects</a> |
-        <a href="../contact/">Contact</a> |
-        <a href="https://github.com/boyang102" target="_blank">GitHub</a>|
-        <a href="../resume/">Resume</a> 
-        
+        <a href="../index.html">Home</a>
+        <a href="../projects/">Projects</a>
+        <a href="../contact/" class="current">Contact</a>
+        <a href="https://github.com/boyang102" target="_blank">GitHub</a>
+        <a href="../resume/">Resume</a>
     </nav>
 
-    <h1>Contact</h1>
+    <h1>Contact Me</h1>
     <p>You can reach me by filling out this form:</p>
 
     <!-- Contact Form -->
     <form action="mailto:boyang@ucsd.edu" method="POST" enctype="text/plain">
-        <label>
-            Your Email:
-            <input type="email" name="email" value="test@example.com">
-        </label>
-        <br><br>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
 
-        <label>
-            Subject:
-            <input name="subject" value="Hello from my website">
-        </label>
-        <br><br>
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
 
-        <label>
-            Message:
-            <textarea name="body">This is a test message.</textarea>
-        </label>
-        <br><br>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button>Send</button>
+        <button type="submit">Send</button>
     </form>
 </body>
 </html>
