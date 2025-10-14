@@ -31,9 +31,9 @@ for (let p of pages) {
   let url = p.url;
   let title = p.title;
 
- // 确保所有相对路径都以 index.html 结尾（GitHub Pages 兼容性更好）
-if (!url.startsWith("http")) {
-    url = BASE_PATH + url + "index.html";
+  if (!url.startsWith("http")) {
+    // 使用绝对路径，始终从仓库根目录开始
+    url = BASE_PATH + p.url;
   }
 
   // 创建 <a> 元素
