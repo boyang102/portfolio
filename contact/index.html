@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Boning Yang</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Boning Yang</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="../projects/">Projects</a>
-        <a href="../contact/">Contact</a>
-        <a href="https://github.com/boyang102" target="_blank">GitHub</a>
-        <a href="../resume/">Resume</a>
-    </nav>
+  <h1>Contact Me</h1>
+  <p>You can reach me by filling out this form:</p>
 
-    <h1>Contact Me</h1>
-    <p>You can reach me by filling out this form:</p>
+  <form action="mailto:boyang@ucsd.edu" method="POST" enctype="text/plain">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" required />
 
-    <!-- Contact Form -->
-    <form action="mailto:boyang@ucsd.edu" method="POST" enctype="text/plain">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" required>
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" required />
 
-        <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" required>
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+    <button type="submit">Send</button>
+  </form>
 
-        <button type="submit">Send</button>
-    </form>
-
-    <script type="module" src="../global.js"></script>
+  <script type="module" src="../global.js"></script>
 </body>
 </html>
