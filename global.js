@@ -24,7 +24,7 @@ document.body.prepend(nav);
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/" // 本地运行
-    : "/website/"; // ⚠️ 改成你的 GitHub Pages 仓库名，例如 "/portfolio/"
+    : "/portfolio/"; // ✅ 正确路径（GitHub Pages 仓库名）
 
 // 生成导航链接
 for (let p of pages) {
