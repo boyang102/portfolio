@@ -31,8 +31,10 @@ for (let p of pages) {
   let url = p.url;
   let title = p.title;
 
-  // 如果是内部链接，添加 BASE_PATH 前缀
-  url = !url.startsWith("http") ? BASE_PATH + url : url;
+ // 确保所有相对路径都以 index.html 结尾（GitHub Pages 兼容性更好）
+if (!url.startsWith("http")) {
+    url = BASE_PATH + url + "index.html";
+  }
 
   // 创建 <a> 元素
   let a = document.createElement("a");
