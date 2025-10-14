@@ -1,23 +1,27 @@
-/* Global variables */
+/* ========== Step 4: Dark Mode Support & Color Variables ========== */
 html {
-  --color-accent: oklch(65% 50% 0);  /* 自定义强调色 */
+  color-scheme: light dark;                     /* 自动适配系统主题 */
+  --color-accent: oklch(65% 50% 0);             /* 主题强调色 */
   accent-color: var(--color-accent);
+  background-color: canvas;
+  color: canvastext;
 }
 
-/* Base body styles */
+/* ========== Base Body Styles ========== */
 body {
   font: 100%/1.5 system-ui;
   max-width: 100ch;
   margin-inline: auto;
   padding: 1em;
-  color: #333;
 }
 
-/* Navigation bar with Flexbox */
+/* ========== Navigation Bar ========== */
 nav {
   display: flex;
   margin-bottom: 1.5em;
-  border-bottom: 1px solid oklch(80% 3% 200); /* 浅灰下边框 */
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border-color);
+  --border-color: oklch(50% 10% 200 / 40%);     /* 深浅模式都柔和 */
 }
 
 nav a {
@@ -36,14 +40,35 @@ nav a:hover {
   color: var(--color-accent);
 }
 
-/* Current page link */
+/* Current page link highlight */
 nav a.current {
-  border-bottom: 0.4em solid oklch(80% 3% 200);
+  border-bottom: 0.4em solid oklch(80% 3% 200 / 60%);
   padding-bottom: 0.1em;
   font-weight: bold;
 }
 
-/* Profile image styling */
+/* ========== Dark Mode Switcher (top right corner) ========== */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.8em;
+  font-family: inherit;
+  background: color-mix(in oklch, canvas, var(--color-accent) 8%);
+  border: 1px solid var(--border-color);
+  border-radius: 0.3em;
+  padding: 0.3em 0.6em;
+}
+
+.color-scheme select {
+  font-family: inherit;
+  font-size: 0.9em;
+  background: inherit;
+  color: inherit;
+  border: none;
+}
+
+/* ========== Profile Image Styling ========== */
 img {
   max-width: 100%;
   height: auto;
@@ -51,17 +76,17 @@ img {
   margin-top: 1em;
 }
 
-/* Contact form with Grid layout */
+/* ========== Contact Form (Grid Layout) ========== */
 form {
   display: grid;
-  grid-template-columns: auto 1fr; /* 左边自动宽度，右边占满 */
-  gap: 1em;                        /* 行列间距 */
+  grid-template-columns: auto 1fr;
+  gap: 1em;
   max-width: 40rem;
   margin: 0 auto;
 }
 
 label {
-  display: contents; /* label 的文字和 input 分别放入 grid */
+  display: contents;
 }
 
 input,
@@ -69,60 +94,59 @@ textarea {
   font: inherit;
   padding: 0.5em;
   box-sizing: border-box;
-  width: 100%; /* 占满右侧列 */
+  width: 100%;
 }
 
 button {
-  grid-column: 1 / -1; /* 按钮跨两列 */
+  grid-column: 1 / -1;
   justify-self: center;
   padding: 0.5em 1em;
   font: inherit;
 }
 
-/* Projects grid layout */
+/* ========== Projects Grid Layout ========== */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-  gap: 1.5em;  /* 卡片之间的间距 */
+  gap: 1.5em;
 }
 
-/* Step 4.3: align project contents with subgrid */
 .projects article {
   display: grid;
-  grid-template-rows: subgrid; /* 继承父 grid 的行 */
-  grid-row: span 3;            /* 每个项目跨 3 行 */
-  border: 1px solid #ccc;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  border: 1px solid var(--border-color);
   border-radius: 0.5em;
   padding: 1em;
-  background: #fafafa;
-  gap: 1em; /* 内部间距 */
+  background: color-mix(in oklch, canvas, var(--color-accent) 4%);
+  gap: 1em;
 }
 
 .projects h2 {
-  margin: 0; /* 去掉多余空隙，避免撑开行 */
+  margin: 0;
 }
 
 .projects img {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 0; /* 用 gap 控制间距 */
+  margin: 0;
 }
 
-/* Headings hierarchy and typography */
+/* ========== Headings Hierarchy ========== */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
-  text-wrap: balance; /* 避免标题换行不均衡 */
+  text-wrap: balance;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
 
 h1 {
-  font-size: 400%;   /* 比正文大很多，突出页面标题 */
+  font-size: 400%;
 }
 
 h2 {
-  font-size: 200%;   /* 比正文和 h1 小，但仍然清晰 */
+  font-size: 200%;
 }
 
 h3 {

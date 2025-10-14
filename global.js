@@ -24,11 +24,10 @@ document.body.prepend(nav);
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/" // 本地运行
-    : "/website/"; // ⚠️ 请改成你的 GitHub Pages 仓库名，例如 "/portfolio/"
+    : "/website/"; // ⚠️ 改成你的 GitHub Pages 仓库名，例如 "/portfolio/"
 
 // 生成导航链接
 for (let p of pages) {
-  // 复制 url/title
   let url = p.url;
   let title = p.title;
 
@@ -46,9 +45,47 @@ for (let p of pages) {
     a.host === location.host && a.pathname === location.pathname
   );
 
-  // 如果是外部链接（GitHub），让它在新标签页打开
+  // 如果是外部链接（GitHub），新标签页打开
   a.toggleAttribute("target", a.host !== location.host);
 
   // 加入导航栏
   nav.append(a);
 }
+
+// ---------- Step 4: Dark Mode Switch ----------
+
+document.body.insertAdjacentHTML(
+  "afterbegin",
+  `
+  <label class="color-scheme">
+    Theme:
+    <select>
+      <option value="light dark">Automatic</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+`
+);
+
+// 获取 <select> 元素
+let select = document.querySelector(".color-scheme select");
+
+// 设置主题的统一函数
+function setColorScheme(scheme) {
+  document.documentElement.style.setProperty("color-scheme", scheme);
+  select.value = scheme;
+}
+
+// 页面加载时读取本地偏好
+if ("colorScheme" in localStorage) {
+  setColorScheme(localStorage.colorScheme);
+}
+
+// 用户切换主题时更新
+select.addEventListener("input", (event) => {
+  const scheme = event.target.value;
+  setColorScheme(scheme);
+  localStorage.colorScheme = scheme; // 保存偏好
+  console.log("Color scheme changed to:", scheme);
+});
