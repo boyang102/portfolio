@@ -88,4 +88,32 @@ select.addEventListener("input", (event) => {
   setColorScheme(scheme);
   localStorage.colorScheme = scheme; // 保存偏好
   console.log("Color scheme changed to:", scheme);
+})
+
+// ---------- Step 5: Better Contact Form (Optional) ----------
+
+// 1️⃣ 获取表单（不是每个页面都有）
+const form = document.querySelector("form");
+
+// 2️⃣ 如果存在，就添加监听器
+form?.addEventListener("submit", (event) => {
+  event.preventDefault(); // 阻止默认提交
+
+  // 3️⃣ 获取表单数据
+  const data = new FormData(form);
+  const params = [];
+
+  // 4️⃣ 遍历所有字段并进行标准 URL 编码
+  for (let [name, value] of data) {
+    params.push(`${name}=${encodeURIComponent(value)}`);
+  }
+
+  // 5️⃣ 拼接 mailto URL
+  // 例如 mailto:boyang@ucsd.edu?subject=Hello&body=Message
+  const url = `${form.action}?${params.join("&")}`;
+
+  console.log("Generated mailto URL:", url);
+
+  // 6️⃣ 打开用户邮箱客户端并带入表单内容
+  location.href = url;
 });
