@@ -9,7 +9,7 @@ async function main() {
 
   // ---------- GitHub API ----------
   const profileStats = document.querySelector('#profile-stats');
-  const githubData = await fetchGitHubData('boyang102');
+  const githubData = await fetchGitHubData('boyang102'); // 👈 你的 GitHub 用户名
 
   if (profileStats && githubData) {
     profileStats.innerHTML = `
