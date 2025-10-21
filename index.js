@@ -1,15 +1,15 @@
 import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
 async function main() {
-  // ---------- 显示最新 3 个项目 ----------
+  // ---------- Step 2: 显示最新 3 个项目 ----------
   const projects = await fetchJSON('/portfolio/lib/projects.json');
   const latestProjects = projects.slice(0, 3);
   const projectsContainer = document.querySelector('.projects');
   renderProjects(latestProjects, projectsContainer, 'h3');
 
-  // ---------- GitHub API ----------
+  // ---------- Step 3: 加载 GitHub 数据 ----------
   const profileStats = document.querySelector('#profile-stats');
-  const githubData = await fetchGitHubData('boyang102'); // 👈 你的 GitHub 用户名
+  const githubData = await fetchGitHubData('boyang102'); // 👈 改成你的 GitHub 用户名
 
   if (profileStats && githubData) {
     profileStats.innerHTML = `

@@ -74,7 +74,7 @@ select.addEventListener("input", (event) => {
   console.log("Color scheme changed to:", scheme);
 });
 
-// ---------- 表单（Contact 页面） ----------
+// ---------- 联系表单 ----------
 const form = document.querySelector("form");
 form?.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -91,39 +91,36 @@ form?.addEventListener("submit", (event) => {
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch projects: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data;
+    if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+    return await response.json();
   } catch (error) {
-    console.error("Error fetching or parsing JSON data:", error);
+    console.error("Error fetching JSON:", error);
     return [];
   }
 }
 
 // ---------- Step 1.4: Render Projects ----------
-export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+export function renderProjects(projects, containerElement, headingLevel = "h2") {
   if (!containerElement || !(containerElement instanceof HTMLElement)) {
     console.error("Invalid container element provided to renderProjects()");
     return;
   }
 
-  containerElement.innerHTML = '';
+  containerElement.innerHTML = "";
 
   for (const project of projects) {
-    const article = document.createElement('article');
+    const article = document.createElement("article");
     article.innerHTML = `
-      <${headingLevel}>${project.title || 'Untitled Project'} (${project.year || 'N/A'})</${headingLevel}>
+      <${headingLevel}>${project.title || "Untitled Project"}</${headingLevel}>
       <img src="${project.image || 'https://via.placeholder.com/300x200?text=No+Image'}" 
-           alt="${project.title || 'No title'}" />
-      <p>${project.description || 'No description available.'}</p>
+           alt="${project.title || "No title"}" />
+      <p>${project.description || "No description available."}</p>
     `;
     containerElement.appendChild(article);
   }
 }
 
-// ---------- Step 3: Fetch GitHub Data ----------
+// ---------- Step 3.2: Fetch GitHub Data ----------
 export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
 }
