@@ -133,3 +133,31 @@ export async function fetchJSON(url) {
     return [];
   }
 }
+
+// Step 1.4: Render Projects Function
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  // 1️⃣ 检查参数有效性
+  if (!containerElement || !(containerElement instanceof HTMLElement)) {
+    console.error('Invalid container element provided to renderProjects()');
+    return;
+  }
+
+  // 2️⃣ 清空旧内容
+  containerElement.innerHTML = '';
+
+  // 3️⃣ 遍历项目数组
+  for (const project of projects) {
+    const article = document.createElement('article');
+
+    // 4️⃣ 动态生成内容
+    article.innerHTML = `
+      <${headingLevel}>${project.title || 'Untitled Project'}</${headingLevel}>
+      <img src="${project.image || 'https://via.placeholder.com/300x200?text=No+Image'}" 
+           alt="${project.title || 'No title'}" />
+      <p>${project.description || 'No description available.'}</p>
+    `;
+
+    // 5️⃣ 将 article 加入容器
+    containerElement.appendChild(article);
+  }
+}

@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <h1>Projects</h1>
+  <h1 class="projects-title">Projects</h1>
   <p>Here I will showcase my data science, analytics, and coding projects.</p>
 
   <!-- 空容器，等待 JS 动态加载 -->
   <div class="projects"></div>
 
-  <!-- 引入项目渲染脚本 -->
+  <!-- ✅ 引入全局和项目脚本（必须放在 </body> 之前） -->
+  <script type="module" src="../global.js"></script>
   <script type="module" src="./projects.js"></script>
 </body>
 </html>
-

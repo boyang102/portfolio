@@ -7,3 +7,8 @@ async function main() {
 }
 
 main();
+
+const titleElement = document.querySelector('.projects-title');
+if (titleElement && projects) {
+  titleElement.textContent = `Projects (${projects.length})`;
+}
