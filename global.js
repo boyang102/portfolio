@@ -114,11 +114,16 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   for (const project of projects) {
     const article = document.createElement('article');
     article.innerHTML = `
-      <${headingLevel}>${project.title || 'Untitled Project'}</${headingLevel}>
+      <${headingLevel}>${project.title || 'Untitled Project'} (${project.year || 'N/A'})</${headingLevel}>
       <img src="${project.image || 'https://via.placeholder.com/300x200?text=No+Image'}" 
            alt="${project.title || 'No title'}" />
       <p>${project.description || 'No description available.'}</p>
     `;
     containerElement.appendChild(article);
   }
+}
+
+// ---------- Step 3: Fetch GitHub Data ----------
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
 }

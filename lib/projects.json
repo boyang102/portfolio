@@ -1,17 +1,74 @@
 [
     {
-      "title": "Project 1",
+      "title": "Amazon Shipment Optimization Dashboard",
+      "year": "2025",
       "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Project 1 description"
+      "description": "Built a BI dashboard in QuickSight analyzing item consolidation and shipment KPIs."
     },
     {
-      "title": "Project 2",
+      "title": "Predictive Mental Health Analysis",
+      "year": "2024",
       "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Project 2 description"
+      "description": "Developed machine learning models using 6M+ EHR records to predict youth mental health crises."
     },
     {
-      "title": "Project 3",
+      "title": "MEG Neural Motion Classifier",
+      "year": "2023",
       "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Project 3 description"
+      "description": "Implemented CNN and TCN models for MEG-based visual motion classification in the Qualcomm Institute."
+    },
+    {
+      "title": "Conjoint Analysis Simulation",
+      "year": "2025",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Simulated consumer choice data and estimated MNL/Bayesian models in R and Python."
+    },
+    {
+      "title": "Supplier Rationalization Strategy",
+      "year": "2025",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Analyzed procurement spend data for Koe-Meyer Inc. using Tableau to identify cost efficiencies."
+    },
+    {
+      "title": "MLE Poisson Model Blog Post",
+      "year": "2024",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Built Poisson regression models to analyze NYC Airbnb listings and customer behavior."
+    },
+    {
+      "title": "GroceryDB Visualization",
+      "year": "2024",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Designed interactive visualizations for product category spending using D3.js and Tableau."
+    },
+    {
+      "title": "Charitable Giving Replication Study",
+      "year": "2025",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Replicated Karlan & List (2007) field experiment on matching donations using R and Quarto."
+    },
+    {
+      "title": "Attention and Memory Lecture Slides",
+      "year": "2024",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Prepared course materials for COGS 101B midterm review covering attention and perception."
+    },
+    {
+      "title": "Business Insights Dashboard",
+      "year": "2023",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Created Tableau dashboards linking customer segmentation with executive KPIs."
+    },
+    {
+      "title": "Web Portfolio (This Site!)",
+      "year": "2025",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Designed and implemented a responsive personal portfolio using HTML, CSS, and JS modules."
+    },
+    {
+      "title": "Dance and Visualization Project",
+      "year": "2024",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Explored data visualization aesthetics inspired by choreography and movement dynamics."
     }
   ]
