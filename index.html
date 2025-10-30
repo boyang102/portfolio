@@ -3,27 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boning Yang: Personal site and portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Projects - Boning Yang</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <h1>Boning Yang</h1>
+  <h1 class="projects-title">12 Projects</h1>
+  <p>Here I will showcase my data science, analytics, and coding projects.</p>
 
-  <p>
-    I am a detail-oriented Data Scientist with experience in business analytics and predictive modeling.
-    Skilled in Python, SQL, Tableau, and statistical modeling to generate actionable insights.
-  </p>
+  <!-- ✅ Step 1: D3 Pie Chart Container -->
+  <svg id="projects-pie-plot"></svg>
 
-  <img src="images/image.png" alt="Boning Yang profile photo" />
-
-  <h2>Latest Projects</h2>
+  <!-- Existing project list -->
   <div class="projects"></div>
 
-  <h2>GitHub Stats</h2>
-  <div id="profile-stats">Loading GitHub data...</div>
-
-  <!-- 引入脚本 -->
-  <script type="module" src="global.js"></script>
-  <script type="module" src="index.js"></script>
+  <!-- Scripts -->
+  <script type="module" src="../global.js"></script>
+  <script type="module" src="./projects.js"></script>
 </body>
 </html>

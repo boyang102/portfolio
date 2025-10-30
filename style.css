@@ -21,7 +21,7 @@ nav {
   margin-bottom: 1.5em;
   padding-bottom: 0.5em;
   border-bottom: 1px solid var(--border-color);
-  --border-color: oklch(50% 10% 200 / 40%);     /* 深浅模式都柔和 */
+  --border-color: oklch(50% 10% 200 / 40%);
 }
 
 nav a {
@@ -33,14 +33,12 @@ nav a {
   font-weight: 500;
 }
 
-
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
   color: var(--color-accent);
 }
 
-/* Current page link highlight */
 nav a.current {
   border-bottom: 0.4em solid oklch(80% 3% 200 / 60%);
   padding-bottom: 0.1em;
