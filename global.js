@@ -100,24 +100,23 @@ export async function fetchJSON(url) {
 }
 
 // ---------- ✅ Step 1.4: Render Projects ----------
+// ---------- Step 1.4: Render Projects ----------
 export function renderProjects(projects, containerElement, headingLevel = "h2") {
-  if (!containerElement || !(containerElement instanceof HTMLElement)) {
-    console.error("Invalid container element provided to renderProjects()");
-    return;
-  }
+  if (!containerElement || !(containerElement instanceof HTMLElement)) return;
 
   containerElement.innerHTML = "";
 
   for (const project of projects) {
     const article = document.createElement("article");
     article.innerHTML = `
-      <${headingLevel}>${project.title || "Untitled Project"}</${headingLevel}>
-      <img src="${project.image || 'https://via.placeholder.com/300x200?text=No+Image'}" 
+      <${headingLevel} class="project-title">${project.title ?? "Untitled Project"}</${headingLevel}>
+      <img src="${project.image || 'https://via.placeholder.com/300x200?text=No+Image'}"
            alt="${project.title || "No title"}" />
-      <p>${project.description || "No description available."}</p>
-      <p style="color: gray; font-family: Baskerville; font-variant-numeric: oldstyle-nums;">
-        ${project.year ? project.year : ""}
-      </p>
+
+      <div class="project-meta">
+        <p class="project-desc">${project.description ?? ""}</p>
+        <p class="project-year">${project.year ? String(project.year) : ""}</p>
+      </div>
     `;
     containerElement.appendChild(article);
   }

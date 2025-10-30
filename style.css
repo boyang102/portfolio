@@ -234,3 +234,33 @@ h3 {
 .selected:is(path) {
   fill: var(--color);
 }
+
+/* ===== Projects card layout fix ===== */
+.projects article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;            /* 让标题、图、描述、年份有间距 */
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;            /* 描述与年份间距 */
+}
+
+.project-desc {
+  margin: 0;              /* 避免默认 margin 挤压 */
+}
+
+.project-year {
+  margin: 0;
+  color: oklch(55% 0.03 250);
+  font-family: Baskerville, "Times New Roman", serif;
+  font-variant-numeric: oldstyle-nums;
+  font-size: 0.95em;
+}
+
+/* 可选：让 legend 看起来更像卡片（你截图里的效果） */
+.legend {
+  box-shadow: 0 0 0 1px color-mix(in oklch, canvastext, transparent 80%) inset;
+}
