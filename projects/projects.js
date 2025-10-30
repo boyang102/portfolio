@@ -2,27 +2,26 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import { renderProjects } from "../global.js";
 
-// ---------- Step 3: Plot Projects Per Year + Legend ----------
 async function loadProjects() {
   try {
     const response = await fetch("../lib/projects.json");
     if (!response.ok) throw new Error("Failed to load projects.json");
     const projects = await response.json();
 
-    // ---------- Roll up counts per year ----------
+    // ---------- Step 3: Group projects by year ----------
     const rolledData = d3.rollups(
       projects,
       (v) => v.length,
       (d) => d.year
     );
 
-    // Convert to [{ label, value }]
+    // Convert rolled data to [{ label, value }]
     const data = rolledData.map(([year, count]) => ({
       label: year,
       value: count,
     }));
 
-    // ---------- Draw Pie Chart ----------
+    // ---------- Step 3.1: Draw Pie Chart ----------
     const svg = d3.select("#projects-pie-plot");
     const colors = d3.scaleOrdinal(d3.schemeTableau10);
 
@@ -30,7 +29,7 @@ async function loadProjects() {
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
     const arcData = sliceGenerator(data);
 
-    // Clear old paths
+    // Clear previous chart (important when re-rendering)
     svg.selectAll("*").remove();
 
     arcData.forEach((d, idx) => {
@@ -42,9 +41,9 @@ async function loadProjects() {
         .attr("stroke-width", 0.5);
     });
 
-    // ---------- ✅ Draw Legend ----------
+    // ---------- ✅ Step 3.2: Draw Legend ----------
     const legend = d3.select(".legend");
-    legend.selectAll("*").remove(); // 清空旧的 legend
+    legend.selectAll("*").remove(); // 清空旧 legend
 
     data.forEach((d, idx) => {
       legend
@@ -56,13 +55,13 @@ async function loadProjects() {
         `);
     });
 
-    console.log("✅ Legend rendered:", data);
+    console.log("✅ Legend rendered successfully:", data);
 
-    // ---------- Render Projects Below ----------
+    // ---------- Step 3.3: Render Project Cards ----------
     const container = document.querySelector(".projects");
     renderProjects(projects, container, "h2");
   } catch (err) {
-    console.error("Error loading or rendering projects:", err);
+    console.error("❌ Error loading or rendering projects:", err);
   }
 }
 
