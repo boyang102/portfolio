@@ -1,6 +1,6 @@
 // projects.js
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { renderProjects } from "../global.js";  // ✅ 保留原来的项目渲染函数
+import { renderProjects } from "../global.js";  
 
 // ---------- Step 1: D3 Pie Chart ----------
 const svg = d3
