@@ -160,3 +160,50 @@ h3 {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ========== ✅ Pie Chart + Legend Styling ========== */
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2em;
+  margin-block: 2em;
+}
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-inline: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Legend grid */
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  border: 1px solid var(--border-color);
+  padding: 1em;
+  border-radius: 0.5em;
+  background: color-mix(in oklch, canvas, var(--color-accent) 4%);
+  list-style: none;
+  margin: 0;
+}
+
+/* Each legend item */
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.9em;
+}
+
+/* Swatch color dot */
+.legend .swatch {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: var(--color);
+  display: inline-block;
+}

@@ -10,8 +10,19 @@
   <h1 class="projects-title">12 Projects</h1>
   <p>Here I will showcase my data science, analytics, and coding projects.</p>
 
-  <!-- ✅ Step 1: D3 Pie Chart Container -->
-  <svg id="projects-pie-plot"></svg>
+  <!-- ✅ Step 2 + 3: Pie Chart + Legend Container -->
+  <div class="chart-container">
+    <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
+    <ul class="legend"></ul>
+  </div>
+
+  <!-- ✅ Step 4: Search bar (占位) -->
+  <input
+    class="searchBar"
+    type="search"
+    aria-label="Search projects"
+    placeholder="🔍 Search projects…"
+  />
 
   <!-- Existing project list -->
   <div class="projects"></div>
