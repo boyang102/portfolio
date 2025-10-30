@@ -207,3 +207,33 @@ h3 {
   background-color: var(--color);
   display: inline-block;
 }
+
+/* ---------- Search Bar ---------- */
+.searchBar {
+  display: block;
+  margin: 1em auto 2em auto;
+  padding: 0.5em 1em;
+  width: 100%;
+  max-width: 40rem;
+  font-size: 1em;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4em;
+}
+
+/* ---------- Hover & Selected Effects ---------- */
+#projects-pie-plot path {
+  transition: 300ms;
+}
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+#projects-pie-plot path {
+  cursor: pointer;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+}
+.selected:is(path) {
+  fill: var(--color);
+}
