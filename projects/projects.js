@@ -1,7 +1,8 @@
 // projects.js
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import { renderProjects } from "../global.js";  // ✅ 保留原来的项目渲染函数
 
-// Select the SVG container and set coordinate system
+// ---------- Step 1: D3 Pie Chart ----------
 const svg = d3
   .select('#projects-pie-plot')
   .attr('viewBox', '-50 -50 100 100');
@@ -29,3 +30,13 @@ arcData.forEach((d, idx) => {
     .attr('stroke', 'white')
     .attr('stroke-width', 0.5);
 });
+
+// ---------- Step 2: Render Project List ----------
+fetch("../lib/projects.json")
+  .then((response) => response.json())
+  .then((projects) => {
+    renderProjects(projects);  // ✅ 保留原始项目模块渲染逻辑
+  })
+  .catch((error) => {
+    console.error("Error loading projects:", error);
+  });
