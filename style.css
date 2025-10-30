@@ -223,14 +223,11 @@ h3 {
 /* ---------- Hover & Selected Effects ---------- */
 #projects-pie-plot path {
   transition: 300ms;
+  cursor: pointer;
 }
 #projects-pie-plot:has(path:hover) path:not(:hover) {
   opacity: 0.5;
 }
-#projects-pie-plot path {
-  cursor: pointer;
-}
-
 .selected {
   --color: oklch(60% 45% 0) !important;
 }

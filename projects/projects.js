@@ -15,23 +15,25 @@ async function loadProjects() {
   let query = "";
   let selectedIndex = -1;
 
-  // ---------- Helper: Group projects per year ----------
-  function groupData(projectsGiven) {
-    const rolled = d3.rollups(projectsGiven, (v) => v.length, (d) => d.year);
+  // ---------- Helper: group by year ----------
+  function groupData(data) {
+    const rolled = d3.rollups(data, (v) => v.length, (d) => d.year);
     return rolled.map(([year, count]) => ({ label: year, value: count }));
   }
 
-  // ---------- Core: Render Pie Chart + Legend ----------
-  function renderPieChart(projectsGiven) {
-    const data = groupData(projectsGiven);
+  // ---------- Core render: Pie + Legend ----------
+  function renderPieChart(projectList) {
+    const data = groupData(projectList);
+
     const sliceGenerator = d3.pie().value((d) => d.value);
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
     const arcData = sliceGenerator(data);
 
+    // clear existing SVG + legend
     svg.selectAll("*").remove();
     legend.selectAll("*").remove();
 
-    // Draw arcs
+    // Draw pie slices
     arcData.forEach((d, i) => {
       svg
         .append("path")
@@ -42,7 +44,7 @@ async function loadProjects() {
         .attr("cursor", "pointer")
         .on("click", () => {
           selectedIndex = selectedIndex === i ? -1 : i;
-          updateFilteredProjects();
+          update();
         });
     });
 
@@ -57,37 +59,38 @@ async function loadProjects() {
         )
         .on("click", () => {
           selectedIndex = selectedIndex === i ? -1 : i;
-          updateFilteredProjects();
+          update();
         });
     });
   }
 
-  // ---------- Helper: Filter logic ----------
-  function filterProjects() {
+  // ---------- Filter logic ----------
+  function getFilteredProjects() {
     let filtered = projects.filter((p) => {
-      let values = Object.values(p).join(" ").toLowerCase();
-      return values.includes(query.toLowerCase());
+      const text = Object.values(p).join(" ").toLowerCase();
+      return text.includes(query.toLowerCase());
     });
 
     if (selectedIndex !== -1) {
-      const selectedYear = groupData(projects)[selectedIndex].label;
+      const grouped = groupData(projects);
+      const selectedYear = grouped[selectedIndex]?.label;
       filtered = filtered.filter((p) => p.year === selectedYear);
     }
 
     return filtered;
   }
 
-  // ---------- Update rendered projects + chart ----------
-  function updateFilteredProjects() {
-    const filtered = filterProjects();
+  // ---------- Update all ----------
+  function update() {
+    const filtered = getFilteredProjects();
     renderProjects(filtered, projectsContainer, "h2");
     renderPieChart(filtered);
   }
 
-  // ---------- Search event ----------
+  // ---------- Search logic ----------
   searchInput.addEventListener("input", (e) => {
     query = e.target.value;
-    updateFilteredProjects();
+    update();
   });
 
   // ---------- Initial render ----------
