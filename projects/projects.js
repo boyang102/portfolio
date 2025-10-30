@@ -13,87 +13,87 @@ async function loadProjects() {
   const colors = d3.scaleOrdinal(d3.schemeTableau10);
 
   let query = "";
-  let selectedIndex = -1;
+  let selectedYear = null;
 
-  // ---------- Helper: group by year ----------
+  // Group projects by year
   function groupData(data) {
     const rolled = d3.rollups(data, (v) => v.length, (d) => d.year);
     return rolled.map(([year, count]) => ({ label: year, value: count }));
   }
 
-  // ---------- Core render: Pie + Legend ----------
+  // Render Pie + Legend
   function renderPieChart(projectList) {
     const data = groupData(projectList);
+    svg.selectAll("*").remove();
+    legend.selectAll("*").remove();
 
     const sliceGenerator = d3.pie().value((d) => d.value);
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
     const arcData = sliceGenerator(data);
 
-    // clear existing SVG + legend
-    svg.selectAll("*").remove();
-    legend.selectAll("*").remove();
-
-    // Draw pie slices
-    arcData.forEach((d, i) => {
-      svg
-        .append("path")
-        .attr("d", arcGenerator(d))
-        .attr("fill", colors(i))
-        .attr("stroke", "white")
-        .attr("stroke-width", 0.5)
-        .attr("cursor", "pointer")
-        .on("click", () => {
-          selectedIndex = selectedIndex === i ? -1 : i;
-          update();
-        });
-    });
+    // Draw arcs
+    const arcs = svg
+      .selectAll("path")
+      .data(arcData)
+      .join("path")
+      .attr("d", arcGenerator)
+      .attr("fill", (_, i) => colors(i))
+      .attr("stroke", "white")
+      .attr("stroke-width", 0.5)
+      .attr("cursor", "pointer")
+      .on("click", (_, d) => {
+        selectedYear = selectedYear === d.data.label ? null : d.data.label;
+        update();
+      });
 
     // Draw legend
-    data.forEach((d, i) => {
-      legend
-        .append("li")
-        .attr("style", `--color:${colors(i)}`)
-        .attr("class", i === selectedIndex ? "selected" : "")
-        .html(
-          `<span class="swatch"></span> <strong>${d.label}</strong> <em>(${d.value})</em>`
-        )
-        .on("click", () => {
-          selectedIndex = selectedIndex === i ? -1 : i;
-          update();
-        });
-    });
+    const legendItems = legend
+      .selectAll("li")
+      .data(data)
+      .join("li")
+      .attr("style", (_, i) => `--color:${colors(i)}`)
+      .attr("class", (d) =>
+        d.label === selectedYear ? "selected" : ""
+      )
+      .html(
+        (d) =>
+          `<span class="swatch"></span><strong>${d.label}</strong> <em>(${d.value})</em>`
+      )
+      .on("click", (_, d) => {
+        selectedYear = selectedYear === d.label ? null : d.label;
+        update();
+      });
+
+    // Highlight selected arc
+    arcs.attr("class", (d) =>
+      d.data.label === selectedYear ? "selected" : null
+    );
   }
 
-  // ---------- Filter logic ----------
+  // Filter by search + selected year
   function getFilteredProjects() {
-    let filtered = projects.filter((p) => {
+    return projects.filter((p) => {
       const text = Object.values(p).join(" ").toLowerCase();
-      return text.includes(query.toLowerCase());
+      const matchQuery = text.includes(query.toLowerCase());
+      const matchYear = !selectedYear || p.year === selectedYear;
+      return matchQuery && matchYear;
     });
-
-    if (selectedIndex !== -1) {
-      const grouped = groupData(projects);
-      const selectedYear = grouped[selectedIndex]?.label;
-      filtered = filtered.filter((p) => p.year === selectedYear);
-    }
-
-    return filtered;
   }
 
-  // ---------- Update all ----------
+  // Update both sections
   function update() {
     const filtered = getFilteredProjects();
     renderProjects(filtered, projectsContainer, "h2");
     renderPieChart(filtered);
   }
 
-  // ---------- Search logic ----------
+  // Live search
   searchInput.addEventListener("input", (e) => {
     query = e.target.value;
     update();
   });
 
-  // ---------- Initial render ----------
+  // Initial render
   renderProjects(projects, projectsContainer, "h2");
   renderPieChart(projects);
 }

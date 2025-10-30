@@ -7,16 +7,17 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <!-- ✅ 页面标题与说明 -->
   <h1 class="projects-title">12 Projects</h1>
   <p>Here I will showcase my data science, analytics, and coding projects.</p>
 
-  <!-- ✅ Step 2 + 3: Pie Chart + Legend Container -->
+  <!-- ✅ Step 2–5: 饼图 + 图例容器 -->
   <div class="chart-container">
     <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
     <ul class="legend"></ul>
   </div>
 
-  <!-- ✅ Step 4: Search bar (占位) -->
+  <!-- ✅ Step 4: 搜索栏 -->
   <input
     class="searchBar"
     type="search"
@@ -24,10 +25,10 @@
     placeholder="🔍 Search projects…"
   />
 
-  <!-- Existing project list -->
+  <!-- ✅ Step 5: 项目展示区域 -->
   <div class="projects"></div>
 
-  <!-- Scripts -->
+  <!-- ✅ 全局脚本与项目脚本 -->
   <script type="module" src="../global.js"></script>
   <script type="module" src="./projects.js"></script>
 </body>
