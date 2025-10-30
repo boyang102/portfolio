@@ -1,28 +1,18 @@
 // projects.js
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { renderProjects } from "../global.js";  
+import { renderProjects } from "../global.js"; // ✅ 导入函数
 
 // ---------- Step 1: D3 Pie Chart ----------
 const svg = d3
   .select('#projects-pie-plot')
   .attr('viewBox', '-50 -50 100 100');
 
-// Example dataset
-let data = [1, 2, 3, 4, 5, 5];
-
-// Arc generator: defines radius
+let data = [1, 2, 3, 4, 5, 5]; // Example dataset
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-
-// Pie layout generator: calculates slice angles
 let sliceGenerator = d3.pie();
-
-// Compute arc data
 let arcData = sliceGenerator(data);
-
-// D3 color palette
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-// Append slices to SVG
 arcData.forEach((d, idx) => {
   svg.append('path')
     .attr('d', arcGenerator(d))
@@ -35,7 +25,9 @@ arcData.forEach((d, idx) => {
 fetch("../lib/projects.json")
   .then((response) => response.json())
   .then((projects) => {
-    renderProjects(projects);  // ✅ 保留原始项目模块渲染逻辑
+    // ✅ 正确调用 renderProjects()，并传入容器元素
+    const container = document.querySelector(".projects");
+    renderProjects(projects, container, "h2");
   })
   .catch((error) => {
     console.error("Error loading projects:", error);
