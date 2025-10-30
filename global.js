@@ -99,7 +99,7 @@ export async function fetchJSON(url) {
   }
 }
 
-// ---------- Step 1.4: Render Projects ----------
+// ---------- ✅ Step 1.4: Render Projects ----------
 export function renderProjects(projects, containerElement, headingLevel = "h2") {
   if (!containerElement || !(containerElement instanceof HTMLElement)) {
     console.error("Invalid container element provided to renderProjects()");
@@ -115,6 +115,9 @@ export function renderProjects(projects, containerElement, headingLevel = "h2") 
       <img src="${project.image || 'https://via.placeholder.com/300x200?text=No+Image'}" 
            alt="${project.title || "No title"}" />
       <p>${project.description || "No description available."}</p>
+      <p style="color: gray; font-family: Baskerville; font-variant-numeric: oldstyle-nums;">
+        ${project.year ? project.year : ""}
+      </p>
     `;
     containerElement.appendChild(article);
   }
