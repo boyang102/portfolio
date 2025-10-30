@@ -10,25 +10,28 @@ async function loadProjects() {
     const projects = await response.json();
 
     // ---------- Roll up counts per year ----------
-    let rolledData = d3.rollups(
+    const rolledData = d3.rollups(
       projects,
       (v) => v.length,
       (d) => d.year
     );
 
-    // Convert to {label,value}
-    let data = rolledData.map(([year, count]) => ({ label: year, value: count }));
+    // Convert to [{ label, value }]
+    const data = rolledData.map(([year, count]) => ({
+      label: year,
+      value: count,
+    }));
 
     // ---------- Draw Pie Chart ----------
-    let svg = d3.select("#projects-pie-plot");
-    let colors = d3.scaleOrdinal(d3.schemeTableau10);
+    const svg = d3.select("#projects-pie-plot");
+    const colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-    let sliceGenerator = d3.pie().value((d) => d.value);
-    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-    let arcData = sliceGenerator(data);
+    const sliceGenerator = d3.pie().value((d) => d.value);
+    const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+    const arcData = sliceGenerator(data);
 
     // Clear old paths
-    svg.selectAll("path").remove();
+    svg.selectAll("*").remove();
 
     arcData.forEach((d, idx) => {
       svg
@@ -39,15 +42,21 @@ async function loadProjects() {
         .attr("stroke-width", 0.5);
     });
 
-    // ---------- Draw Legend ----------
-    let legend = d3.select(".legend");
-    legend.selectAll("*").remove(); // clear old legend
+    // ---------- ✅ Draw Legend ----------
+    const legend = d3.select(".legend");
+    legend.selectAll("*").remove(); // 清空旧的 legend
+
     data.forEach((d, idx) => {
       legend
         .append("li")
         .attr("style", `--color:${colors(idx)}`)
-        .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+        .html(`
+          <span class="swatch"></span>
+          <strong>${d.label}</strong> <em>(${d.value})</em>
+        `);
     });
+
+    console.log("✅ Legend rendered:", data);
 
     // ---------- Render Projects Below ----------
     const container = document.querySelector(".projects");
